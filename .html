@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>犬種当てクイズ</title>
+  <style>
+    body {
+      font-family: "Hiragino Maru Gothic ProN", "Yu Gothic", sans-serif;
+      background: linear-gradient(to bottom, #cceeff, #ffffff);
+      color: #333;
+      text-align: center;
+      padding: 2rem;
+      margin: 0;
+    }
+    #quiz {
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 2rem;
+      padding: 2rem;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      display: inline-block;
+      max-width: 90%;
+    }
+    img {
+      max-width: 300px;
+      border-radius: 1rem;
+      margin-bottom: 1rem;
+    }
+    button {
+      display: block;
+      width: 80%;
+      margin: 0.5rem auto;
+      padding: 1rem;
+      border: none;
+      border-radius: 1rem;
+      background-color: #fff6aa;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    button:hover {
+      transform: scale(1.05);
+      background-color: #ffee88;
+    }
+  </style>
+</head>
+<body>
+  <h1>犬種当てクイズ🐶</h1>
+  <div id="quiz"></div>
+
+  <script>
+    const questions = [
+      {
+        image: "fukumaru.png",
+        choices: ["柴犬", "フレンチブルドッグ", "シベリアンハスキー", "ポメラニアン"],
+        answer: "フレンチブルドッグ",
+        explanation: "この犬はフレンチブルドッグです！特徴的な耳がポイントです。"
+      },
+      {
+        image: "shiba.png",
+        choices: ["柴犬", "ゴールデンレトリバー", "ダックスフンド", "パグ"],
+        answer: "柴犬",
+        explanation: "この犬は柴犬です！日本原産の人気犬種。"
+      },
+      {
+        image: "beagle.png",
+        choices: ["ビーグル", "コーギー", "シェルティ", "チワワ"],
+        answer: "ビーグル",
+        explanation: "この犬はビーグルです！垂れ耳が特徴です。"
+      },
+      {
+        image: "pomeranian.png",
+        choices: ["パグ", "ボストンテリア", "パピヨン", "ポメラニアン"],
+        answer: "ポメラニアン",
+        explanation: "この犬はポメラニアンです！ふわふわの毛並みが特徴です。"
+      },
+      {
+        image: "dalmatian.png",
+        choices: ["ダルメシアン", "グレーハウンド", "ボルゾイ", "ブルドッグ"],
+        answer: "ダルメシアン",
+        explanation: "この犬はダルメシアンです！特徴的な黒い斑点模様があります。"
+      },
+    ];
+
+    let currentQuestion = 0;
+    function showQuestion() {
+      if (currentQuestion >= questions.length) {
+        document.getElementById("quiz").innerHTML = "<h2>全問終了！お疲れさまでした！</h2>";
+        return;
+      }
+      const q = questions[currentQuestion];
+      document.getElementById("quiz").innerHTML = `
+        <img src="${q.image}" alt="Dog picture"><br>
+        ${q.choices.map(choice => `<button onclick="checkAnswer('${choice}')">${choice}</button>`).join("")}
+      `;
+    }
+    function checkAnswer(selected) {
+      const q = questions[currentQuestion];
+      if (selected === q.answer) {
+        alert("正解！");
+      } else {
+        alert(`残念！ ${q.explanation}`);
+      }
+      currentQuestion++;
+      showQuestion();
+    }
+    window.onload = showQuestion;
+  </script>
+</body>
+</html>
