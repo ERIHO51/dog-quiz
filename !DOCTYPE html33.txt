@@ -1,0 +1,70 @@
+const quizData = [
+  {
+    image: "images/q1.jpg",
+    question: "この犬はどの犬種でしょう？",
+    choices: ["ゴールデンレトリバー", "ダルメシアン", "パグ", "ボーダーコリー"],
+    answer: 0,
+    explanation: "images/explanation1.jpg",
+    explanationText: "この犬はゴールデンレトリバーです！"
+  },
+  // 残り9問も同様に追加してください
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+const questionImage = document.getElementById("question-image");
+const choicesContainer = document.getElementById("choices");
+const feedback = document.getElementById("feedback");
+const resultText = document.getElementById("result-text");
+const explanationImage = document.getElementById("explanation-image");
+const nextButton = document.getElementById("next-button");
+const scoreContainer = document.getElementById("score-container");
+const scoreText = document.getElementById("score-text");
+
+function showQuestion() {
+  const q = quizData[currentQuestion];
+  questionImage.src = q.image;
+  choicesContainer.innerHTML = "";
+  feedback.classList.add("hidden");
+
+  q.choices.forEach((choice, index) => {
+    const btn = document.createElement("button");
+    btn.textContent = choice;
+    btn.addEventListener("click", () => selectAnswer(index));
+    choicesContainer.appendChild(btn);
+  });
+}
+
+function selectAnswer(choiceIndex) {
+  const q = quizData[currentQuestion];
+  feedback.classList.remove("hidden");
+  if (choiceIndex === q.answer) {
+    resultText.textContent = "✅ 正解！";
+    explanationImage.style.display = "none";
+    score++;
+  } else {
+    resultText.textContent = `❌ 不正解！ ${q.explanationText}`;
+    explanationImage.src = q.explanation;
+    explanationImage.style.display = "block";
+  }
+}
+
+nextButton.addEventListener("click", () => {
+  currentQuestion++;
+  if (currentQuestion < quizData.length) {
+    showQuestion();
+  } else {
+    showScore();
+  }
+});
+
+function showScore() {
+  questionImage.style.display = "none";
+  choicesContainer.style.display = "none";
+  feedback.style.display = "none";
+  scoreContainer.classList.remove("hidden");
+  scoreText.textContent = `あなたのスコアは ${score} / ${quizData.length} です！`;
+}
+
+showQuestion();
