@@ -9,7 +9,7 @@
     body {
       font-family: "Kiwi Maru", sans-serif;
       background: linear-gradient(to bottom, #cceeff, #ffffff);
-      color: #444;
+      color: #444;  /* 全体の文字色を濃いグレー */
       text-align: center;
       padding: 1rem;
       margin: 0;
@@ -28,16 +28,6 @@
       border-radius: 1rem;
       margin-bottom: 1rem;
     }
-    img.character {
-      width: 60px;
-      vertical-align: middle;
-      margin-right: 8px;
-    }
-    img.explain {
-      width: 120px;
-      vertical-align: middle;
-      margin-right: 8px;
-    }
     button {
       display: block;
       width: 90%;
@@ -48,80 +38,9 @@
       border-radius: 1rem;
       background-color: #fff6aa;
       font-size: 1.1rem;
-      color: #444;
+      color: #444;  /* ボタンの文字も濃いグレー */
       cursor: pointer;
       transition: transform 0.2s;
     }
     button:hover {
       transform: scale(1.05);
-      background-color: #ffee88;
-    }
-    h1 {
-      font-weight: 700;
-      color: #444;
-      font-size: 1.5rem;
-    }
-  </style>
-</head>
-<body>
-  <h1>
-    <img src="IMG_3354.PNG" alt="キャラクター" class="character">
-    この犬なーんだ？
-  </h1>
-  <div id="quiz"></div>
-
-  <script>
-    const questionsPool = [
-      { image: "goru.webp", choices: ["ゴールデンレトリバー","コーギー","チワワ","ポメラニアン"], answer:"ゴールデンレトリバー", explanation:"この犬はゴールデンレトリバーです！優しい性格で人気です。" },
-      { image: "ko-gi-.webp", choices: ["コーギー","トイプードル","柴犬","ゴールデンレトリバー"], answer:"コーギー", explanation:"この犬はコーギーです！短い足がチャームポイントです。" },
-      { image: "pome.jpg", choices: ["ポメラニアン","チワワ","フレンチブルドッグ","トイプードル"], answer:"ポメラニアン", explanation:"この犬はポメラニアンです！ふわふわの毛が特徴です。" },
-      { image: "tiwawa.webp", choices: ["チワワ","柴犬","ダルメシアン","パグ"], answer:"チワワ", explanation:"この犬はチワワです！小さな体が特徴です。" },
-      { image: "toipu.webp", choices: ["トイプードル","コーギー","ビーグル","ポメラニアン"], answer:"トイプードル", explanation:"この犬はトイプードルです！賢くて可愛いです。" },
-      { image: "publicdomainq-0049179yub.jpg.pagespeed.ce.S1knALDJzA.jpg", choices: ["柴犬","コーギー","トイプードル","チワワ"], answer:"柴犬", explanation:"この犬は柴犬です！日本の代表的な犬種です。" }
-    ];
-
-    const selectedQuestions = [];
-    while (selectedQuestions.length < 5) {
-      const idx = Math.floor(Math.random() * questionsPool.length);
-      if (!selectedQuestions.includes(questionsPool[idx])) selectedQuestions.push(questionsPool[idx]);
-    }
-
-    let currentQuestion = 0;
-    let correctCount = 0;
-
-    function showQuestion() {
-      if (currentQuestion >= selectedQuestions.length) {
-        document.getElementById("quiz").innerHTML = `<h2>あなたは5問中${correctCount}問正解だったワン！🐶</h2>`;
-        return;
-      }
-      const q = selectedQuestions[currentQuestion];
-      document.getElementById("quiz").innerHTML = `
-        <img src="${q.image}" alt="Dog picture" class="quiz-image"><br>
-        ${q.choices.map(choice => `<button onclick="checkAnswer('${choice}')">${choice}</button>`).join("")}
-      `;
-    }
-
-    function checkAnswer(selected) {
-      const q = selectedQuestions[currentQuestion];
-      if (selected === q.answer) {
-        alert("正解だワン！🐶");
-        correctCount++;
-        currentQuestion++;
-        showQuestion();
-      } else {
-        document.getElementById("quiz").innerHTML = `
-          <p><img src="IMG_3358.PNG" alt="キャラクター" class="explain">残念！${q.explanation}</p>
-          <button onclick="nextQuestion()">次の問題へ</button>
-        `;
-      }
-    }
-
-    function nextQuestion() {
-      currentQuestion++;
-      showQuestion();
-    }
-
-    window.onload = showQuestion;
-  </script>
-</body>
-</html>
