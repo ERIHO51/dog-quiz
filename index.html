@@ -4,54 +4,62 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>犬種当てクイズ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: "Hiragino Maru Gothic ProN", "Yu Gothic", sans-serif;
+      font-family: "Kiwi Maru", sans-serif;
       background: linear-gradient(to bottom, #cceeff, #ffffff);
-      color: #333;
+      color: #444;
       text-align: center;
-      padding: 2rem;
+      padding: 1rem;
       margin: 0;
     }
     #quiz {
-      background: rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.9);
       border-radius: 2rem;
-      padding: 2rem;
+      padding: 1rem;
       box-shadow: 0 0 20px rgba(0,0,0,0.1);
       display: inline-block;
-      max-width: 90%;
-      position: relative;
+      max-width: 95%;
     }
     img.quiz-image {
+      width: 100%;
       max-width: 300px;
       border-radius: 1rem;
       margin-bottom: 1rem;
     }
     img.character {
-      width: 80px;
+      width: 60px;
       vertical-align: middle;
-      margin-right: 10px;
+      margin-right: 8px;
     }
     img.explain {
-      width: 150px;
+      width: 120px;
       vertical-align: middle;
-      margin-right: 10px;
+      margin-right: 8px;
     }
     button {
       display: block;
-      width: 80%;
+      width: 90%;
+      max-width: 300px;
       margin: 0.5rem auto;
       padding: 1rem;
       border: none;
       border-radius: 1rem;
       background-color: #fff6aa;
-      font-size: 1rem;
+      font-size: 1.1rem;
+      color: #444;
       cursor: pointer;
       transition: transform 0.2s;
     }
     button:hover {
       transform: scale(1.05);
       background-color: #ffee88;
+    }
+    h1 {
+      font-weight: 700;
+      color: #444;
+      font-size: 1.5rem;
     }
   </style>
 </head>
@@ -63,73 +71,56 @@
   <div id="quiz"></div>
 
   <script>
-    const questions = [
-      {
-        image: "https://images.unsplash.com/photo-1558788353-f76d92427f16?fit=crop&w=500&h=500",
-        choices: ["ビーグル", "ラブラドール", "ダルメシアン", "シベリアンハスキー"],
-        answer: "ビーグル",
-        explanation: "この犬はビーグルです！垂れ耳と優しい目が特徴です。"
-      },
-      {
-        image: "https://images.unsplash.com/photo-1560807707-8cc77767d783?fit=crop&w=500&h=500",
-        choices: ["柴犬", "ゴールデンレトリバー", "パグ", "ボーダーコリー"],
-        answer: "柴犬",
-        explanation: "この犬は柴犬です！日本生まれの犬種です。"
-      },
-      {
-        image: "https://images.unsplash.com/photo-1583337130417-3346a1ec00a5?fit=crop&w=500&h=500",
-        choices: ["フレンチブルドッグ", "コーギー", "ポメラニアン", "ドーベルマン"],
-        answer: "フレンチブルドッグ",
-        explanation: "この犬はフレンチブルドッグです！耳と鼻が特徴です。"
-      },
-      {
-        image: "https://images.unsplash.com/photo-1626010555005-967a9859d6ab?fit=crop&w=500&h=500",
-        choices: ["シベリアンハスキー", "ジャーマンシェパード", "ビーグル", "チワワ"],
-        answer: "シベリアンハスキー",
-        explanation: "この犬はシベリアンハスキーです！青い目と毛色が魅力です。"
-      },
-      {
-        image: "https://images.unsplash.com/photo-1601758123927-3c3e1c0d2c2b?fit=crop&w=500&h=500",
-        choices: ["ダルメシアン", "バセットハウンド", "ボーダーコリー", "パピヨン"],
-        answer: "ダルメシアン",
-        explanation: "この犬はダルメシアンです！黒い斑点が特徴です。"
-      },
+    const questionsPool = [
+      { image: "https://images.unsplash.com/photo-1558788353-f76d92427f16?fit=crop&w=500&h=500", choices: ["ビーグル","ラブラドール","ダルメシアン","ハスキー"], answer:"ビーグル", explanation:"この犬はビーグルです！垂れ耳が特徴。"},
+      { image: "https://images.unsplash.com/photo-1583337130417-3346a1ec00a5?fit=crop&w=500&h=500", choices: ["柴犬","レトリバー","パグ","コーギー"], answer:"柴犬", explanation:"この犬は柴犬です！日本原産。"},
+      { image: "https://images.unsplash.com/photo-1626010555005-967a9859d6ab?fit=crop&w=500&h=500", choices: ["ハスキー","シェパード","ビーグル","チワワ"], answer:"ハスキー", explanation:"この犬はシベリアンハスキーです！青い目が魅力。"},
+      { image: "https://images.unsplash.com/photo-1601758123927-3c3e1c0d2c2b?fit=crop&w=500&h=500", choices: ["ダルメシアン","バセット","ボーダー","パピヨン"], answer:"ダルメシアン", explanation:"この犬はダルメシアンです！斑点が特徴。"},
+      { image: "https://images.unsplash.com/photo-1583346380334-8f2ec52f6d38?fit=crop&w=500&h=500", choices: ["フレンチブルドッグ","パグ","チワワ","柴犬"], answer:"フレンチブルドッグ", explanation:"この犬はフレンチブルドッグです！特徴的な耳。"},
+      // ここに他15問も追加可能（20問分）
     ];
 
+    const selectedQuestions = [];
+    while (selectedQuestions.length < 5) {
+      const idx = Math.floor(Math.random() * questionsPool.length);
+      if (!selectedQuestions.includes(questionsPool[idx])) selectedQuestions.push(questionsPool[idx]);
+    }
+
     let currentQuestion = 0;
+    let correctCount = 0;
+
     function showQuestion() {
-      if (currentQuestion >= questions.length) {
-        document.getElementById("quiz").innerHTML = "<h2>全問終了！お疲れさまでした！</h2>";
+      if (currentQuestion >= selectedQuestions.length) {
+        document.getElementById("quiz").innerHTML = `<h2>あなたは5問中${correctCount}問正解だったワン！🐶</h2>`;
         return;
       }
-      const q = questions[currentQuestion];
+      const q = selectedQuestions[currentQuestion];
       document.getElementById("quiz").innerHTML = `
         <img src="${q.image}" alt="Dog picture" class="quiz-image"><br>
         ${q.choices.map(choice => `<button onclick="checkAnswer('${choice}')">${choice}</button>`).join("")}
       `;
     }
+
     function checkAnswer(selected) {
-      const q = questions[currentQuestion];
+      const q = selectedQuestions[currentQuestion];
       if (selected === q.answer) {
-        alert("正解！");
+        alert("正解だワン！🐶");
+        correctCount++;
+        currentQuestion++;
+        showQuestion();
       } else {
-        // 不正解時にfukumaru2.pngを一緒にアラート風に表示
         document.getElementById("quiz").innerHTML = `
-          <p>
-            <img src="fukumaru2.png" alt="キャラクター" class="explain">
-            残念！ ${q.explanation}
-          </p>
+          <p><img src="fukumaru2.png" alt="キャラクター" class="explain">残念！${q.explanation}</p>
           <button onclick="nextQuestion()">次の問題へ</button>
         `;
-        return;
       }
-      currentQuestion++;
-      showQuestion();
     }
+
     function nextQuestion() {
       currentQuestion++;
       showQuestion();
     }
+
     window.onload = showQuestion;
   </script>
 </body>
