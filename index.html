@@ -20,11 +20,22 @@
       box-shadow: 0 0 20px rgba(0,0,0,0.1);
       display: inline-block;
       max-width: 90%;
+      position: relative;
     }
-    img {
+    img.quiz-image {
       max-width: 300px;
       border-radius: 1rem;
       margin-bottom: 1rem;
+    }
+    img.character {
+      width: 80px;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+    img.explain {
+      width: 150px;
+      vertical-align: middle;
+      margin-right: 10px;
     }
     button {
       display: block;
@@ -45,40 +56,43 @@
   </style>
 </head>
 <body>
-  <h1>犬種当てクイズ🐶</h1>
+  <h1>
+    <img src="fukumaru.png" alt="キャラクター" class="character">
+    この犬なーんだ？
+  </h1>
   <div id="quiz"></div>
 
   <script>
     const questions = [
       {
-        image: "fukumaru.png",
-        choices: ["柴犬", "フレンチブルドッグ", "シベリアンハスキー", "ポメラニアン"],
-        answer: "フレンチブルドッグ",
-        explanation: "この犬はフレンチブルドッグです！特徴的な耳がポイントです。"
-      },
-      {
-        image: "shiba.png",
-        choices: ["柴犬", "ゴールデンレトリバー", "ダックスフンド", "パグ"],
-        answer: "柴犬",
-        explanation: "この犬は柴犬です！日本原産の人気犬種。"
-      },
-      {
-        image: "beagle.png",
-        choices: ["ビーグル", "コーギー", "シェルティ", "チワワ"],
+        image: "https://images.unsplash.com/photo-1558788353-f76d92427f16?fit=crop&w=500&h=500",
+        choices: ["ビーグル", "ラブラドール", "ダルメシアン", "シベリアンハスキー"],
         answer: "ビーグル",
-        explanation: "この犬はビーグルです！垂れ耳が特徴です。"
+        explanation: "この犬はビーグルです！垂れ耳と優しい目が特徴です。"
       },
       {
-        image: "pomeranian.png",
-        choices: ["パグ", "ボストンテリア", "パピヨン", "ポメラニアン"],
-        answer: "ポメラニアン",
-        explanation: "この犬はポメラニアンです！ふわふわの毛並みが特徴です。"
+        image: "https://images.unsplash.com/photo-1560807707-8cc77767d783?fit=crop&w=500&h=500",
+        choices: ["柴犬", "ゴールデンレトリバー", "パグ", "ボーダーコリー"],
+        answer: "柴犬",
+        explanation: "この犬は柴犬です！日本生まれの犬種です。"
       },
       {
-        image: "dalmatian.png",
-        choices: ["ダルメシアン", "グレーハウンド", "ボルゾイ", "ブルドッグ"],
+        image: "https://images.unsplash.com/photo-1583337130417-3346a1ec00a5?fit=crop&w=500&h=500",
+        choices: ["フレンチブルドッグ", "コーギー", "ポメラニアン", "ドーベルマン"],
+        answer: "フレンチブルドッグ",
+        explanation: "この犬はフレンチブルドッグです！耳と鼻が特徴です。"
+      },
+      {
+        image: "https://images.unsplash.com/photo-1626010555005-967a9859d6ab?fit=crop&w=500&h=500",
+        choices: ["シベリアンハスキー", "ジャーマンシェパード", "ビーグル", "チワワ"],
+        answer: "シベリアンハスキー",
+        explanation: "この犬はシベリアンハスキーです！青い目と毛色が魅力です。"
+      },
+      {
+        image: "https://images.unsplash.com/photo-1601758123927-3c3e1c0d2c2b?fit=crop&w=500&h=500",
+        choices: ["ダルメシアン", "バセットハウンド", "ボーダーコリー", "パピヨン"],
         answer: "ダルメシアン",
-        explanation: "この犬はダルメシアンです！特徴的な黒い斑点模様があります。"
+        explanation: "この犬はダルメシアンです！黒い斑点が特徴です。"
       },
     ];
 
@@ -90,7 +104,7 @@
       }
       const q = questions[currentQuestion];
       document.getElementById("quiz").innerHTML = `
-        <img src="${q.image}" alt="Dog picture"><br>
+        <img src="${q.image}" alt="Dog picture" class="quiz-image"><br>
         ${q.choices.map(choice => `<button onclick="checkAnswer('${choice}')">${choice}</button>`).join("")}
       `;
     }
@@ -99,8 +113,20 @@
       if (selected === q.answer) {
         alert("正解！");
       } else {
-        alert(`残念！ ${q.explanation}`);
+        // 不正解時にfukumaru2.pngを一緒にアラート風に表示
+        document.getElementById("quiz").innerHTML = `
+          <p>
+            <img src="fukumaru2.png" alt="キャラクター" class="explain">
+            残念！ ${q.explanation}
+          </p>
+          <button onclick="nextQuestion()">次の問題へ</button>
+        `;
+        return;
       }
+      currentQuestion++;
+      showQuestion();
+    }
+    function nextQuestion() {
       currentQuestion++;
       showQuestion();
     }
