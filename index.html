@@ -28,16 +28,6 @@
       border-radius: 1rem;
       margin-bottom: 1rem;
     }
-    img.character {
-      width: 60px;
-      vertical-align: middle;
-      margin-right: 8px;
-    }
-    img.explain {
-      width: 120px;
-      vertical-align: middle;
-      margin-right: 8px;
-    }
     button {
       display: block;
       width: 90%;
@@ -57,27 +47,29 @@
       background-color: #ffee88;
     }
     h1 {
-      font-weight: 700;
+      font-weight: 900;
       color: #444;
-      font-size: 1.5rem;
+      font-size: 2rem;
+      margin-bottom: 1rem;
     }
   </style>
 </head>
 <body>
-  <h1>
-    <img src="IMG_3354.PNG" alt="キャラクター" class="character">
-    この犬なーんだ？
-  </h1>
+  <h1>この犬なーんだ？🐶</h1>
   <div id="quiz"></div>
 
   <script>
     const questionsPool = [
-      { image: "goru.webp", choices: ["ゴールデンレトリバー","チワワ","ポメラニアン","トイプードル"], answer:"ゴールデンレトリバー", explanation:"この犬はゴールデンレトリバーです！賢く優しい性格で人気です。"},
-      { image: "ko-gi-.webp", choices: ["コーギー","柴犬","ダルメシアン","ハスキー"], answer:"コーギー", explanation:"この犬はコーギーです！短い足と長い胴が特徴です。"},
-      { image: "pome.jpg", choices: ["ポメラニアン","トイプードル","ビーグル","コーギー"], answer:"ポメラニアン", explanation:"この犬はポメラニアンです！ふわふわの毛が魅力。"},
-      { image: "tiwawa.webp", choices: ["チワワ","パグ","柴犬","ハスキー"], answer:"チワワ", explanation:"この犬はチワワです！小さな体と大きな目が可愛い。"},
-      { image: "toipu.webp", choices: ["トイプードル","ポメラニアン","柴犬","フレンチブルドッグ"], answer:"トイプードル", explanation:"この犬はトイプードルです！巻き毛が特徴で賢い犬種です。"},
-      { image: "publicdomainq-0049179yub.jpg.pagespeed.ce.S1knALDJzA.jpg", choices: ["柴犬","チワワ","ビーグル","コーギー"], answer:"柴犬", explanation:"この犬は柴犬です！日本を代表する犬種です。"},
+      { image: "https://images.unsplash.com/photo-1558788353-f76d92427f16?fit=crop&w=600&q=80", choices: ["ゴールデンレトリバー", "チワワ", "柴犬", "コーギー"], answer:"ゴールデンレトリバー", explanation:"この犬はゴールデンレトリバーです！優しく賢い犬種です。" },
+      { image: "https://images.unsplash.com/photo-1603565817532-b2259b1b3b8b?fit=crop&w=600&q=80", choices: ["フレンチブルドッグ", "柴犬", "ボーダーコリー", "シーズー"], answer:"柴犬", explanation:"この犬は柴犬です！日本原産で人気があります。" },
+      { image: "https://images.unsplash.com/photo-1583337130417-3346a1c5cba3?fit=crop&w=600&q=80", choices: ["ビーグル", "ダックスフンド", "シベリアンハスキー", "コーギー"], answer:"ビーグル", explanation:"この犬はビーグルです！垂れ耳が特徴です。" },
+      { image: "https://images.unsplash.com/photo-1627000082368-8edff10d90d8?fit=crop&w=600&q=80", choices: ["ポメラニアン", "チワワ", "トイプードル", "柴犬"], answer:"チワワ", explanation:"この犬はチワワです！小さく大きな目が魅力。" },
+      { image: "https://images.unsplash.com/photo-1603481545540-773d7ba64706?fit=crop&w=600&q=80", choices: ["フレンチブルドッグ", "パグ", "ゴールデンレトリバー", "シーズー"], answer:"フレンチブルドッグ", explanation:"この犬はフレンチブルドッグです！ユニークな顔立ちが特徴です。" },
+      { image: "https://images.unsplash.com/photo-1603758937356-48012e42e4be?fit=crop&w=600&q=80", choices: ["パグ", "チワワ", "ビーグル", "フレンチブルドッグ"], answer:"パグ", explanation:"この犬はパグです！ユーモラスな顔が魅力。" },
+      { image: "https://images.unsplash.com/photo-1583337130209-5df2ec1e3533?fit=crop&w=600&q=80", choices: ["トイプードル", "ボーダーコリー", "コーギー", "ビーグル"], answer:"トイプードル", explanation:"この犬はトイプードルです！賢く巻き毛が特徴。" },
+      { image: "https://images.unsplash.com/photo-1579586337278-3ab5c8a44b6c?fit=crop&w=600&q=80", choices: ["シベリアンハスキー", "ゴールデンレトリバー", "柴犬", "フレンチブルドッグ"], answer:"シベリアンハスキー", explanation:"この犬はシベリアンハスキーです！青い目が印象的。" },
+      { image: "https://images.unsplash.com/photo-1622708462290-89e2d427bf2a?fit=crop&w=600&q=80", choices: ["コーギー", "柴犬", "ビーグル", "ポメラニアン"], answer:"コーギー", explanation:"この犬はコーギーです！短い足と胴長が特徴。" },
+      { image: "https://images.unsplash.com/photo-1615759619230-3bb2745078e1?fit=crop&w=600&q=80", choices: ["ポメラニアン", "パピヨン", "チワワ", "ビーグル"], answer:"ポメラニアン", explanation:"この犬はポメラニアンです！ふわふわの毛が魅力。" },
     ];
 
     const selectedQuestions = [];
@@ -91,7 +83,10 @@
 
     function showQuestion() {
       if (currentQuestion >= selectedQuestions.length) {
-        document.getElementById("quiz").innerHTML = `<h2>あなたは5問中${correctCount}問正解だったワン！🐶</h2>`;
+        document.getElementById("quiz").innerHTML = `
+          <h2>あなたは5問中${correctCount}問正解だったワン！🐶</h2>
+          <button onclick="restartQuiz()">もう一度遊ぶ</button>
+        `;
         return;
       }
       const q = selectedQuestions[currentQuestion];
@@ -109,15 +104,20 @@
         currentQuestion++;
         showQuestion();
       } else {
-        document.getElementById("quiz").innerHTML = `
-          <p><img src="IMG_3358.PNG" alt="キャラクター" class="explain">残念！${q.explanation}</p>
-          <button onclick="nextQuestion()">次の問題へ</button>
-        `;
+        alert(`残念！${q.explanation}`);
+        currentQuestion++;
+        showQuestion();
       }
     }
 
-    function nextQuestion() {
-      currentQuestion++;
+    function restartQuiz() {
+      currentQuestion = 0;
+      correctCount = 0;
+      selectedQuestions.length = 0;
+      while (selectedQuestions.length < 5) {
+        const idx = Math.floor(Math.random() * questionsPool.length);
+        if (!selectedQuestions.includes(questionsPool[idx])) selectedQuestions.push(questionsPool[idx]);
+      }
       showQuestion();
     }
 
