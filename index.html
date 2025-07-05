@@ -65,7 +65,7 @@
 </head>
 <body>
   <h1>
-    <img src="fukumaru.png" alt="キャラクター" class="character">
+    <img src="IMG_3354.PNG" alt="キャラクター" class="character">
     この犬なーんだ？
   </h1>
   <div id="quiz"></div>
@@ -77,7 +77,7 @@
       { image: "https://images.unsplash.com/photo-1626010555005-967a9859d6ab?fit=crop&w=500&h=500", choices: ["ハスキー","シェパード","ビーグル","チワワ"], answer:"ハスキー", explanation:"この犬はシベリアンハスキーです！青い目が魅力。"},
       { image: "https://images.unsplash.com/photo-1601758123927-3c3e1c0d2c2b?fit=crop&w=500&h=500", choices: ["ダルメシアン","バセット","ボーダー","パピヨン"], answer:"ダルメシアン", explanation:"この犬はダルメシアンです！斑点が特徴。"},
       { image: "https://images.unsplash.com/photo-1583346380334-8f2ec52f6d38?fit=crop&w=500&h=500", choices: ["フレンチブルドッグ","パグ","チワワ","柴犬"], answer:"フレンチブルドッグ", explanation:"この犬はフレンチブルドッグです！特徴的な耳。"},
-      // ここに他15問も追加可能（20問分）
+      // ここに他15問を追加できます
     ];
 
     const selectedQuestions = [];
@@ -110,7 +110,7 @@
         showQuestion();
       } else {
         document.getElementById("quiz").innerHTML = `
-          <p><img src="fukumaru2.png" alt="キャラクター" class="explain">残念！${q.explanation}</p>
+          <p><img src="IMG_3358.PNG" alt="キャラクター" class="explain">残念！${q.explanation}</p>
           <button onclick="nextQuestion()">次の問題へ</button>
         `;
       }
